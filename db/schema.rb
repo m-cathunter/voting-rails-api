@@ -10,6 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_10_05_095836) do
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "voting_id"
+    t.string "name"
+    t.decimal "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["voting_id"], name: "index_votes_on_voting_id"
+  end
+
+  create_table "votings", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "number_of_votes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
