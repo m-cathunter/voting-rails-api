@@ -6,6 +6,11 @@ module Api
         render json: {status: 'SUCCESS', message: 'Loaded voteings', data: votings}, status: :ok
       end
 
+      def show
+        voting = Voting.find(params[:id])
+        render json: {status: 'SUCCESS', message: 'Loaded voting', data: voting}, status: :ok
+      end
+
       def create
         voting = Voting.new(voting_params)
 
@@ -15,6 +20,12 @@ module Api
           render json: {status: 'ERROR', message: 'Voting not saved',
             data: voting.errors}, status: :unprocessable_entity
         end
+      end
+
+      def destroy
+        voting = Voting.find(params[:id])
+        voting.destroy
+        render json: {status: 'SUCCESS', message: 'Deleted voting', data: voting}, status: :ok
       end
 
       def update
