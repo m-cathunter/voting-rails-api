@@ -24,6 +24,12 @@ module Api
         end
       end
 
+      def destroy
+        vote = Vote.find(params[:id])
+        vote.destroy
+        render json: {status: 'SUCCESS', message: 'Deleted vote', data: vote}, status: :ok
+      end
+
       private
 
       def vote_params
