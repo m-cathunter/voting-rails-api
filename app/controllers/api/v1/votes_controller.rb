@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class VotesController < ApplicationController
@@ -38,24 +40,11 @@ module Api
       end
 
       def score(numbers)
+        count = Hash.new(0)
+        numbers.each {|number| count[number] += 1}
+        most_frequent_numbers = count.sort_by { |k,v| v }.last
 
-        count = []
-        output = []
-        numbers.compact!
-        unique = numbers.uniq
-        j=0
-
-        unique.each do |i|
-            count[j] = numbers.count(i)
-            j+=1
-        end
-        k=0
-        count.each do |i|
-            output[k] = unique[k] if i == count.max
-            k+=1
-        end
-
-        return "The score is: #{output.compact.inspect}"
+        return "The score is: #{most_frequent_numbers}"
       end
     end
   end
